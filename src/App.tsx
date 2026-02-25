@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
 
+
 export default function App() {
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +24,7 @@ export default function App() {
   return (
     <>
       <CustomCursor />
+
       <AnimatePresence mode="wait">
         {loading ? (
           <LoadingScreen key="loading" />

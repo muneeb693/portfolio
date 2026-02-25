@@ -7,20 +7,19 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  const springConfig = { stiffness: 400, damping: 30, mass: 0.5 };
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
+  // Smooth spring configuration
+  const dotSpringConfig = { stiffness: 800, damping: 50 };
+  const ringSpringConfig = { stiffness: 250, damping: 30 };
+
+  const dotX = useSpring(mouseX, dotSpringConfig);
+  const dotY = useSpring(mouseY, dotSpringConfig);
+  const ringX = useSpring(mouseX, ringSpringConfig);
+  const ringY = useSpring(mouseY, ringSpringConfig);
 
   useEffect(() => {
-    // Detect touch device
-    const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    setIsTouchDevice(touch);
-
-    if (touch) return; // Exit if mobile
-
     const updateMousePosition = (e: MouseEvent) => {
+      // Show cursor as soon as mouse moves
       if (!isVisible) setIsVisible(true);
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -33,7 +32,8 @@ export default function CustomCursor() {
         target.tagName.toLowerCase() === 'button' ||
         target.closest('a') ||
         target.closest('button') ||
-        target.classList.contains('interactive')
+        target.classList.contains('interactive') ||
+        window.getComputedStyle(target).cursor === 'pointer'
       );
 
       setIsHovering(isInteractive);
@@ -61,87 +61,42 @@ export default function CustomCursor() {
     };
   }, [mouseX, mouseY, isVisible]);
 
-  if (isTouchDevice || !isVisible) return null;
+  // Don't render if not visible (e.g. initial state or mouse out of window)
+  if (!isVisible) return null;
 
   return (
     <>
-      {/* Outer Rotating Brackets */}
+      {/* Outer Ring */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[100] mix-blend-screen"
+        className="fixed top-0 left-0 w-10 h-10 border border-[var(--color-neon-blue)] rounded-full pointer-events-none z-[9999] opacity-40"
         style={{
-          x: springX,
-          y: springY,
-          translateX: '-50%',
-          translateY: '-50%',
-          width: isHovering ? 60 : 40,
-          height: isHovering ? 60 : 40,
-        }}
-        transition={{ type: 'spring', ...springConfig }}
-      >
-        {/* Corner Brackets */}
-        <div className="relative w-full h-full relative">
-          <motion.div
-            className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[var(--color-neon-blue)]"
-            animate={{ rotate: isClicking ? 90 : 0 }}
-          />
-          <motion.div
-            className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[var(--color-neon-blue)]"
-            animate={{ rotate: isClicking ? -90 : 0 }}
-          />
-          <motion.div
-            className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-[var(--color-neon-blue)]"
-            animate={{ rotate: isClicking ? -90 : 0 }}
-          />
-          <motion.div
-            className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[var(--color-neon-blue)]"
-            animate={{ rotate: isClicking ? 90 : 0 }}
-          />
-        </div>
-      </motion.div>
-
-      {/* Inner Crosshair */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[101] mix-blend-screen"
-        style={{
-          x: springX,
-          y: springY,
+          x: ringX,
+          y: ringY,
           translateX: '-50%',
           translateY: '-50%',
         }}
-      >
-        <motion.div
-          className="relative flex items-center justify-center"
-          animate={{ rotate: isHovering ? 45 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {/* Vertical Line */}
-          <div className="absolute w-[1px] h-3 bg-[var(--color-neon-blue)] opacity-50" />
-          {/* Horizontal Line */}
-          <div className="absolute h-[1px] w-3 bg-[var(--color-neon-blue)] opacity-50" />
+        animate={{
+          scale: isHovering ? 1.5 : (isClicking ? 0.8 : 1),
+          opacity: isHovering ? 0.8 : 0.4,
+          borderWidth: isHovering ? '1px' : '2px',
+        }}
+        transition={{ type: 'spring', ...ringSpringConfig }}
+      />
 
-          {/* Center Point */}
-          <motion.div
-            className="w-1.5 h-1.5 bg-[var(--color-neon-blue)] rounded-full box-glow"
-            animate={{
-              scale: isClicking ? 0.5 : 1,
-              opacity: isClicking ? 1 : 0.8
-            }}
-          />
-        </motion.div>
-      </motion.div>
-
-      {/* Secondary Glow Trail (Very Subtle) */}
+      {/* Center Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[var(--color-neon-blue)] opacity-10 pointer-events-none z-[98]"
+        className="fixed top-0 left-0 w-2 h-2 bg-[var(--color-neon-blue)] rounded-full pointer-events-none z-[10000] box-glow"
         style={{
-          x: springX,
-          y: springY,
+          x: dotX,
+          y: dotY,
           translateX: '-50%',
           translateY: '-50%',
-          scale: isClicking ? 2 : 1,
         }}
-        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+        animate={{
+          scale: isHovering ? 0.5 : (isClicking ? 1.5 : 1),
+        }}
       />
     </>
   );
 }
+
