@@ -16,7 +16,7 @@ export default function App() {
     // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,8 +31,8 @@ export default function App() {
             key="main"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="relative w-full overflow-hidden bg-black"
+            transition={{ duration: 1 }} // Re-added the transition prop
+            className="relative w-full overflow-hidden bg-black gpu-accelerated"
           >
             {/* Ambient background glow */}
             <div className="fixed inset-0 z-0 pointer-events-none">

@@ -158,18 +158,17 @@ export default function Resume() {
                                             <div className="flex-1 glass-panel p-6 md:p-8 hover:border-[var(--color-neon-blue)] transition-all duration-500 group relative overflow-hidden">
                                                 <div className="absolute top-0 left-0 w-full h-[1px] bg-[var(--color-neon-blue)] box-glow opacity-0 group-hover:opacity-50 animate-scan" />
                                                 <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--color-neon-blue)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--color-neon-blue)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                                                     <div>
-                                                        <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white group-hover:text-glow transition-all">
+                                                        <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white group-hover:text-[var(--color-neon-blue)] transition-colors">
                                                             {item.title}
                                                         </h3>
-                                                        <p className="text-base font-exo text-[var(--color-neon-blue)] tracking-widest uppercase mt-1">
+                                                        <p className="text-[var(--color-neon-blue)] font-exo font-medium">
                                                             {item.company}
                                                         </p>
                                                     </div>
-                                                    <div className="flex flex-col items-start sm:items-end gap-1">
+                                                    <div className="flex flex-col items-start md:items-end gap-1">
                                                         <span className="flex items-center gap-2 text-sm font-space text-gray-400">
                                                             <Calendar size={14} className="text-[var(--color-neon-blue)]" />
                                                             {item.date}
@@ -179,16 +178,16 @@ export default function Resume() {
 
                                                 {item.current && (
                                                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--color-neon-blue-dark)] border border-[var(--color-neon-blue)]/30 rounded-full mb-4">
-                                                        <div className="w-2 h-2 rounded-full bg-[var(--color-neon-blue)] animate-pulse" />
-                                                        <span className="text-[10px] font-exo text-[var(--color-neon-blue)] uppercase tracking-widest">Currently Active</span>
+                                                        <span className="w-2 h-2 rounded-full bg-[var(--color-neon-blue)] animate-pulse shadow-[0_0_10px_var(--color-neon-blue)]" />
+                                                        <span className="text-[10px] font-mono text-[var(--color-neon-blue)] uppercase tracking-wider">Currently Active</span>
                                                     </div>
                                                 )}
 
                                                 <ul className="space-y-3">
-                                                    {item.description.map((desc, i) => (
-                                                        <li key={i} className="flex items-start gap-3 text-sm font-space text-gray-400 leading-relaxed">
-                                                            <span className="mt-2 w-1.5 h-1.5 min-w-[6px] rounded-full bg-[var(--color-neon-blue)]/50" />
-                                                            {desc}
+                                                    {item.description.map((point, i) => (
+                                                        <li key={i} className="flex items-start gap-3 text-sm md:text-base text-gray-400 font-space">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-neon-blue)]/50 mt-2 flex-shrink-0" />
+                                                            {point}
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -204,64 +203,47 @@ export default function Resume() {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -40 }}
                                 transition={{ duration: 0.5, ease: 'easeInOut' }}
+                                className="grid md:grid-cols-2 gap-6"
                             >
-                                <div className="relative">
-                                    <div className="absolute left-[28px] md:left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[var(--color-neon-blue)] via-[var(--color-neon-blue-dark)] to-transparent" />
+                                {educationData.map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                                        className="glass-panel p-6 md:p-8 hover:border-[var(--color-neon-blue)] transition-all duration-500 group relative overflow-hidden"
+                                    >
+                                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                            <GraduationCap size={48} className="text-[var(--color-neon-blue)]" />
+                                        </div>
 
-                                    {educationData.map((item, index) => (
-                                        <motion.div
-                                            key={index}
-                                            initial={{ opacity: 0, y: 30 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.6, delay: index * 0.15 }}
-                                            className="relative flex items-start gap-6 mb-12 pl-20 md:pl-24"
-                                        >
-                                            <div className="absolute left-0 w-14 h-14 md:w-16 md:h-16 rounded-full bg-black border-2 border-[var(--color-neon-blue)] flex items-center justify-center box-glow z-10">
-                                                {item.type === 'diploma' ? (
-                                                    <GraduationCap className="w-6 h-6 text-[var(--color-neon-blue)]" />
-                                                ) : (
-                                                    <Award className="w-6 h-6 text-[var(--color-neon-blue)]" />
-                                                )}
+                                        <div className="relative z-10">
+                                            <div className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider mb-4 ${item.type === 'diploma'
+                                                    ? 'bg-green-500/10 text-green-500 border border-green-500/30'
+                                                    : 'bg-[var(--color-neon-blue)]/10 text-[var(--color-neon-blue)] border border-[var(--color-neon-blue)]/30'
+                                                }`}>
+                                                {item.type === 'diploma' ? 'Academic Diploma' : 'Professional Certificate'}
                                             </div>
 
-                                            <div className="flex-1 glass-panel p-6 md:p-8 hover:border-[var(--color-neon-blue)] transition-all duration-500 group relative overflow-hidden">
-                                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--color-neon-blue-dark)] to-transparent opacity-0 group-hover:opacity-30 translate-y-[-100%] group-hover:translate-y-[100%] transition-all duration-1000 ease-in-out" />
-                                                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--color-neon-blue)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--color-neon-blue)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                            <h3 className="text-lg md:text-xl font-orbitron font-bold text-white mb-2 group-hover:text-[var(--color-neon-blue)] transition-colors">
+                                                {item.title}
+                                            </h3>
+                                            <p className="text-[var(--color-neon-blue)] font-exo text-sm mb-4">
+                                                {item.institution}
+                                            </p>
 
-                                                <div className="relative z-10">
-                                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                                                        <div>
-                                                            <div className="flex items-center gap-3 mb-1">
-                                                                <span className={`px-2 py-0.5 text-[10px] font-exo uppercase tracking-widest border rounded-full ${item.type === 'diploma'
-                                                                    ? 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10'
-                                                                    : 'text-[var(--color-neon-blue)] border-[var(--color-neon-blue)]/30 bg-[var(--color-neon-blue-dark)]'
-                                                                    }`}>
-                                                                    {item.type === 'diploma' ? '🎓 Diploma' : '📜 Certificate'}
-                                                                </span>
-                                                            </div>
-                                                            <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white group-hover:text-glow transition-all">
-                                                                {item.title}
-                                                            </h3>
-                                                            <p className="text-base font-exo text-[var(--color-neon-blue)] tracking-widest uppercase mt-1">
-                                                                {item.institution}
-                                                            </p>
-                                                        </div>
-                                                        <span className="flex items-center gap-2 text-sm font-space text-gray-400">
-                                                            <Calendar size={14} className="text-[var(--color-neon-blue)]" />
-                                                            Issued: {item.date}
-                                                        </span>
-                                                    </div>
-
-                                                    <p className="text-sm font-space text-gray-400 leading-relaxed mt-4">
-                                                        {item.description}
-                                                    </p>
-                                                </div>
+                                            <div className="flex items-center gap-2 text-xs font-space text-gray-500 mb-6">
+                                                <Calendar size={12} />
+                                                {item.date}
                                             </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
+
+                                            <p className="text-sm text-gray-400 font-space leading-relaxed">
+                                                {item.description}
+                                            </p>
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </motion.div>
                         )}
                     </AnimatePresence>
