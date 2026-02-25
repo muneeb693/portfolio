@@ -10,7 +10,7 @@ import * as THREE from 'three';
 // Holographic Neural Lattice
 function NeuralLattice() {
   const groupRef = useRef<THREE.Group>(null);
-  const nodeCount = 40;
+  const nodeCount = 30;
   const connectionRadius = 2.5;
 
   // Generate random nodes on a sphere
@@ -94,7 +94,7 @@ function NeuralLattice() {
 }
 
 // Enhanced Starfield Particles
-function Particles({ count = 300 }: { count?: number }) {
+function Particles({ count = 150 }: { count?: number }) {
   const pointsRef = useRef<THREE.Points>(null);
   const [positions, sizes] = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -157,7 +157,7 @@ function Scene() {
         <NeuralLattice />
       </Float>
 
-      <Particles count={300} />
+      <Particles count={150} />
       <Rig />
 
       <EffectComposer multisampling={8}>
@@ -179,7 +179,7 @@ export default function Hero() {
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* 3D Canvas Background */}
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 10], fov: 50 }} dpr={[1, 1.5]} performance={{ min: 0.5 }}>
+        <Canvas camera={{ position: [0, 0, 10], fov: 50 }} dpr={[1, 1.2]} performance={{ min: 0.5 }}>
           <Scene />
         </Canvas>
       </div>

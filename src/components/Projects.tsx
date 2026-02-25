@@ -40,7 +40,7 @@ export default function Projects() {
   return (
     <section id="projects" ref={targetRef} className="relative h-[200vh] bg-black">
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,9 +53,9 @@ export default function Projects() {
           <div className="w-24 h-1 bg-[var(--color-neon-blue)] mx-auto box-glow" />
         </motion.div>
 
-        <motion.div style={{ x }} className="flex gap-8 px-4 md:px-24 w-[200vw] md:w-[150vw] optimized-transform">
+        <motion.div style={{ x }} className="flex gap-4 md:gap-8 px-4 md:px-24 w-[300vw] md:w-[150vw] optimized-transform">
           {projects.map((project, index) => (
-            <div key={index} className="w-[80vw] md:w-[40vw] flex-shrink-0">
+            <div key={index} className="w-[85vw] md:w-[45vw] lg:w-[40vw] flex-shrink-0">
               <div className="glass-panel overflow-hidden group relative h-[500px] flex flex-col">
                 {/* Image Container */}
                 <div className="relative h-1/2 overflow-hidden">
@@ -80,7 +80,7 @@ export default function Projects() {
                     <p className="text-sm md:text-base font-space text-gray-400 mb-6 line-clamp-3">
                       {project.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.tech.map((tech) => (
                         <span key={tech} className="px-3 py-1 text-xs font-exo text-[var(--color-neon-blue)] border border-[var(--color-neon-blue-dark)] rounded-full bg-[var(--color-neon-blue-dark)]">

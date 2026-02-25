@@ -30,6 +30,7 @@
 
   .glass-panel {
     @apply bg-[var(--color-glass-bg)] backdrop-blur-md border border-[var(--color-glass-border)] rounded-xl;
+    will-change: transform;
   }
 
   .optimized-transform {

@@ -83,11 +83,11 @@ export default function Resume() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="flex justify-center gap-4 sm:gap-6 mb-16"
+                    className="flex justify-center gap-2 sm:gap-6 mb-16"
                 >
                     <button
                         onClick={() => setActiveTab('experience')}
-                        className={`group relative px-8 sm:px-12 py-4 sm:py-5 font-orbitron font-bold text-sm sm:text-base uppercase tracking-[0.15em] transition-all duration-500 interactive overflow-hidden rounded-sm ${activeTab === 'experience'
+                        className={`group relative px-4 sm:px-12 py-3 sm:py-5 font-orbitron font-bold text-xs sm:text-base uppercase tracking-[0.1em] sm:tracking-[0.15em] transition-all duration-500 interactive overflow-hidden rounded-sm ${activeTab === 'experience'
                             ? 'text-black bg-[var(--color-neon-blue)] shadow-[0_0_30px_rgba(0,245,255,0.4),0_0_60px_rgba(0,245,255,0.1)]'
                             : 'text-white border border-white/20 bg-white/5 backdrop-blur-sm hover:border-[var(--color-neon-blue)]/50 hover:text-[var(--color-neon-blue)]'
                             }`}
@@ -108,7 +108,7 @@ export default function Resume() {
 
                     <button
                         onClick={() => setActiveTab('education')}
-                        className={`group relative px-8 sm:px-12 py-4 sm:py-5 font-orbitron font-bold text-sm sm:text-base uppercase tracking-[0.15em] transition-all duration-500 interactive overflow-hidden rounded-sm ${activeTab === 'education'
+                        className={`group relative px-4 sm:px-12 py-3 sm:py-5 font-orbitron font-bold text-xs sm:text-base uppercase tracking-[0.1em] sm:tracking-[0.15em] transition-all duration-500 interactive overflow-hidden rounded-sm ${activeTab === 'education'
                             ? 'text-black bg-[var(--color-neon-blue)] shadow-[0_0_30px_rgba(0,245,255,0.4),0_0_60px_rgba(0,245,255,0.1)]'
                             : 'text-white border border-white/20 bg-white/5 backdrop-blur-sm hover:border-[var(--color-neon-blue)]/50 hover:text-[var(--color-neon-blue)]'
                             }`}
