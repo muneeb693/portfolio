@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume | Muneeb Ur Rehman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --neon-blue: #00F5FF;
+      --neon-blue-dark: rgba(0, 245, 255, 0.2);
+      --neon-blue-glow: rgba(0, 245, 255, 0.5);
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Background Effects */
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-pattern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(var(--neon-blue) 0.5px, transparent 0.5px);
+      background-size: 40px 40px;
+      opacity: 0.02;
+    }
+
+    .bg-pattern::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: var(--neon-blue);
+      opacity: 0.05;
+      filter: blur(200px);
+      border-radius: 50%;
+    }
+
+    /* Header / Navigation Bar */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon-blue);
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 10px var(--neon-blue-glow);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .header-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: white;
+    }
+
+    .header-subtitle {
+      font-family: 'Exo', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--neon-blue);
+      margin-top: 2px;
+    }
+
+    /* Button Group */
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-back {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-back:hover {
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+      box-shadow: 0 0 20px var(--neon-blue-dark), inset 0 0 20px var(--neon-blue-dark);
+    }
+
+    .btn-back::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-back:hover::before {
+      left: 100%;
+    }
+
+    .btn-print {
+      background: var(--neon-blue);
+      color: #000;
+      border: 1px solid var(--neon-blue);
+      box-shadow: 0 0 20px var(--neon-blue-dark);
+    }
+
+    .btn-print:hover {
+      background: white;
+      border-color: white;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn-print::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -200%; }
+      50%, 100% { left: 200%; }
+    }
+
+    /* SVG Icons in buttons */
+    .btn svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* PDF Container */
+    .pdf-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .pdf-frame-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      flex: 1;
+      min-height: 80vh;
+    }
+
+    /* Decorative Frame */
+    .pdf-frame-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: 24px;
+      height: 24px;
+      border-top: 2px solid var(--neon-blue);
+      border-left: 2px solid var(--neon-blue);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .pdf-frame-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 24px;
+      height: 24px;
+      border-bottom: 2px solid var(--neon-blue);
+      border-right: 2px solid var(--neon-blue);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .pdf-embed {
+      width: 100%;
+      height: 100%;
+      min-height: 80vh;
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      border-radius: 4px;
+      background: rgba(10, 10, 15, 0.6);
+    }
+
+    /* Footer Bar */
+    .footer-bar {
+      padding: 16px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-bar p {
+      font-family: 'Exo', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .header {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .btn-group {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+      }
+
+      .header-title {
+        font-size: 12px;
+      }
+
+      .pdf-container {
+        padding: 16px 12px;
+      }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 245, 255, 0.3);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 245, 255, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Pattern -->
+  <div class="bg-pattern"></div>
+
+  <!-- Header with 2 Buttons -->
+  <header class="header">
+    <div class="header-left">
+      <div class="status-dot"></div>
+      <div>
+        <div class="header-title">Muneeb Ur Rehman</div>
+        <div class="header-subtitle">Resume • Secure Document</div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <a href="/" class="btn btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5"></path>
+          <path d="m12 19-7-7 7-7"></path>
+        </svg>
+        Back to Portfolio
+      </a>
+      <button class="btn btn-print" onclick="window.print()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Print as PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- PDF Viewer -->
+  <main class="pdf-container">
+    <div class="pdf-frame-wrapper">
+      <iframe 
+        class="pdf-embed" 
+        src="/Muneeb_Ur_Rehman_CV.pdf" 
+        title="Resume - Muneeb Ur Rehman"
+        frameborder="0"
+      ></iframe>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-bar">
+    <p>&copy; 2026 Muneeb Ur Rehman — All Rights Reserved</p>
+  </footer>
+
+  <!-- Print Styles -->
+  <style>
+    @media print {
+      .header, .footer-bar, .bg-pattern {
+        display: none !important;
+      }
+      body {
+        background: white;
+      }
+      .pdf-container {
+        padding: 0;
+      }
+      .pdf-frame-wrapper::before,
+      .pdf-frame-wrapper::after {
+        display: none;
+      }
+      .pdf-embed {
+        border: none;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</body>
+</html>
