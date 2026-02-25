@@ -45,7 +45,7 @@ export default function Resume() {
     const [activeTab, setActiveTab] = useState<'experience' | 'education'>('experience');
 
     return (
-        <section id="resume" className="relative w-full py-24 px-4 overflow-hidden bg-black">
+        <section id="resume" className="relative w-full py-24 px-4 overflow-x-hidden bg-black">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full opacity-[0.02]"
@@ -220,8 +220,8 @@ export default function Resume() {
 
                                         <div className="relative z-10">
                                             <div className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider mb-4 ${item.type === 'diploma'
-                                                    ? 'bg-green-500/10 text-green-500 border border-green-500/30'
-                                                    : 'bg-[var(--color-neon-blue)]/10 text-[var(--color-neon-blue)] border border-[var(--color-neon-blue)]/30'
+                                                ? 'bg-green-500/10 text-green-500 border border-green-500/30'
+                                                : 'bg-[var(--color-neon-blue)]/10 text-[var(--color-neon-blue)] border border-[var(--color-neon-blue)]/30'
                                                 }`}>
                                                 {item.type === 'diploma' ? 'Academic Diploma' : 'Professional Certificate'}
                                             </div>

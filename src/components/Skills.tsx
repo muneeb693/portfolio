@@ -93,7 +93,7 @@ export default function Skills() {
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
 
   return (
-    <section id="skills" ref={containerRef} className="relative py-32 bg-black overflow-hidden flex flex-col items-center">
+    <section id="skills" ref={containerRef} className="relative py-32 bg-black overflow-x-hidden flex flex-col items-center">
       {/* HUD Background Grid */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
         <div

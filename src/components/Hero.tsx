@@ -185,7 +185,7 @@ export default function Hero() {
       </div>
 
       {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mx-auto pointer-events-none mt-12">
+      <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mx-auto mt-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -224,23 +224,27 @@ export default function Hero() {
         </div>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-6 pointer-events-auto mt-8"
+          className="flex flex-col sm:flex-row gap-6 mt-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          <a
+          <motion.a
             href="#projects"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="px-8 py-4 bg-white text-black font-orbitron uppercase tracking-widest rounded-sm hover:bg-[var(--color-neon-blue)] hover:shadow-[0_0_20px_rgba(0,245,255,0.5)] transition-all duration-300 interactive font-bold"
           >
             View Projects
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="px-8 py-4 border border-white/30 text-white font-orbitron uppercase tracking-widest rounded-sm hover:border-[var(--color-neon-blue)] hover:text-[var(--color-neon-blue)] hover:bg-[var(--color-neon-blue-dark)] transition-all duration-300 interactive backdrop-blur-sm"
           >
             Contact Me
-          </a>
+          </motion.a>
         </motion.div>
       </div>
 

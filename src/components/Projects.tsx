@@ -128,7 +128,7 @@ export default function Projects() {
   const pathScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="projects" ref={containerRef} className="relative py-32 bg-black px-4 overflow-hidden [content-visibility:auto]">
+    <section id="projects" ref={containerRef} className="relative py-32 bg-black px-4 overflow-x-hidden [content-visibility:auto]">
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[var(--color-neon-blue)] opacity-5 blur-[300px] rounded-full" />

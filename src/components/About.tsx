@@ -100,7 +100,7 @@ function SkillCard({ skill, index }: { skill: typeof skills[0], index: number })
 
 export default function About() {
   return (
-    <section id="about" className="relative w-full min-h-screen py-32 flex items-center justify-center px-4 overflow-hidden bg-black">
+    <section id="about" className="relative w-full min-h-screen py-32 flex items-center justify-center px-4 overflow-x-hidden bg-black">
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]"

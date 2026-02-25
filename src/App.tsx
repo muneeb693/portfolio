@@ -34,7 +34,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }} // Re-added the transition prop
-            className="relative w-full overflow-hidden bg-black gpu-accelerated"
+            className="relative w-full overflow-x-hidden bg-black gpu-accelerated"
           >
             {/* Ambient background glow */}
             <div className="fixed inset-0 z-0 pointer-events-none">
