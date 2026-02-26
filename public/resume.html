@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume | Muneeb Ur Rehman</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Space+Grotesk:wght@300..700&display=swap"
+    rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -95,8 +98,15 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
     }
 
     .header-title {
@@ -195,8 +205,14 @@
     }
 
     @keyframes shine {
-      0% { left: -200%; }
-      50%, 100% { left: 200%; }
+      0% {
+        left: -200%;
+      }
+
+      50%,
+      100% {
+        left: 200%;
+      }
     }
 
     /* SVG Icons in buttons */
@@ -206,59 +222,252 @@
       flex-shrink: 0;
     }
 
-    /* PDF Container */
-    .pdf-container {
+    /* Resume Content Styles */
+    .resume-wrapper {
       flex: 1;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 24px;
+      justify-content: center;
+      padding: 40px 24px;
       position: relative;
       z-index: 10;
     }
 
-    .pdf-frame-wrapper {
-      position: relative;
+    .resume-paper {
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(10px);
       width: 100%;
       max-width: 900px;
-      flex: 1;
-      min-height: 80vh;
+      padding: 60px;
+      border: 1px solid rgba(0, 245, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
-    /* Decorative Frame */
-    .pdf-frame-wrapper::before {
+    .resume-paper::before {
       content: '';
       position: absolute;
-      top: -4px;
-      left: -4px;
-      width: 24px;
-      height: 24px;
-      border-top: 2px solid var(--neon-blue);
-      border-left: 2px solid var(--neon-blue);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .pdf-frame-wrapper::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      right: -4px;
-      width: 24px;
-      height: 24px;
-      border-bottom: 2px solid var(--neon-blue);
-      border-right: 2px solid var(--neon-blue);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .pdf-embed {
-      width: 100%;
+      top: 0;
+      left: 0;
+      width: 4px;
       height: 100%;
-      min-height: 80vh;
-      border: 1px solid rgba(0, 245, 255, 0.15);
-      border-radius: 4px;
-      background: rgba(10, 10, 15, 0.6);
+      background: linear-gradient(to bottom, var(--neon-blue), transparent);
+      opacity: 0.5;
+    }
+
+    .resume-header {
+      border-bottom: 2px solid rgba(0, 245, 255, 0.2);
+      padding-bottom: 30px;
+      margin-bottom: 40px;
+    }
+
+    .name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #fff, var(--neon-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .contact-info a {
+      color: var(--neon-blue);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .contact-info a:hover {
+      opacity: 0.8;
+    }
+
+    .resume-section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--neon-blue);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0, 245, 255, 0.1);
+    }
+
+    .summary-text {
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+    }
+
+    .skills-grid {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .skills-grid li {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+    }
+
+    .skills-grid strong {
+      color: var(--neon-blue);
+      margin-right: 8px;
+    }
+
+    .experience-item,
+    .education-item {
+      margin-bottom: 30px;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+
+    .job-title,
+    .degree {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .item-date {
+      font-size: 13px;
+      color: var(--neon-blue);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .item-company {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .item-details {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .item-details li {
+      position: relative;
+      margin-bottom: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .item-details li::before {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        padding: 0 !important;
+      }
+
+      .header,
+      .footer-bar,
+      .bg-pattern,
+      .resume-paper::before {
+        display: none !important;
+      }
+
+      .resume-wrapper {
+        padding: 0 !important;
+      }
+
+      .resume-paper {
+        background: white !important;
+        color: black !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        backdrop-filter: none !important;
+      }
+
+      .name {
+        background: none !important;
+        -webkit-text-fill-color: black !important;
+        color: black !important;
+        font-size: 32pt;
+      }
+
+      .contact-info,
+      .summary-text,
+      .skills-grid li,
+      .item-details li,
+      .item-company {
+        color: #333 !important;
+      }
+
+      .section-title,
+      .item-date,
+      .skills-grid strong {
+        color: #000 !important;
+        border-bottom: 1px solid #eee;
+      }
+
+      .item-details li::before {
+        background: #000 !important;
+      }
+
+      a {
+        color: black !important;
+        text-decoration: none !important;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .resume-paper {
+        padding: 30px;
+      }
+
+      .name {
+        font-size: 30px;
+      }
+
+      .item-header {
+        flex-direction: column;
+        gap: 5px;
+      }
     }
 
     /* Footer Bar */
@@ -326,6 +535,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Background Pattern -->
   <div class="bg-pattern"></div>
@@ -342,14 +552,16 @@
 
     <div class="btn-group">
       <a href="/" class="btn btn-back">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 12H5"></path>
           <path d="m12 19-7-7 7-7"></path>
         </svg>
         Back to Portfolio
       </a>
       <button class="btn btn-print" onclick="window.print()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -359,15 +571,80 @@
     </div>
   </header>
 
-  <!-- PDF Viewer -->
-  <main class="pdf-container">
-    <div class="pdf-frame-wrapper">
-      <iframe 
-        class="pdf-embed" 
-        src="/Muneeb_Ur_Rehman_CV.pdf" 
-        title="Resume - Muneeb Ur Rehman"
-        frameborder="0"
-      ></iframe>
+  <!-- Resume Content -->
+  <main class="resume-wrapper">
+    <div class="resume-paper" id="printable-resume">
+      <!-- Header Section -->
+      <section class="resume-header">
+        <h1 class="name">Muneeb Ur Rehman</h1>
+        <div class="contact-info">
+          <span>Karachi, Pakistan</span>
+          <span>•</span>
+          <span>03318011361</span>
+          <span>•</span>
+          <span>muneebur2116@gmail.com</span>
+          <span>•</span>
+          <a href="https://linkedin.com/in/muneeb-ur-rehman-475a3a2b8"
+            target="_blank">linkedin.com/in/muneeb-ur-rehman-475a3a2b8</a>
+        </div>
+      </section>
+
+      <!-- Professional Summary -->
+      <section class="resume-section">
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary-text">
+          Passionate and detail-oriented Full Stack Developer with hands-on experience in HTML, CSS, JavaScript, and
+          Python. Currently working as a Full-Stack Developer at BytechSol LLC, building responsive and
+          performance-optimized web applications. Strong focus on clean UI/UX and modern web standards.
+        </p>
+      </section>
+
+      <!-- Technical Skills -->
+      <section class="resume-section">
+        <h2 class="section-title">Technical Skills</h2>
+        <ul class="skills-grid">
+          <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript (ES6+), Responsive Design</li>
+          <li><strong>Backend:</strong> Python, API Development</li>
+          <li><strong>Tools:</strong> Git, VS Code</li>
+        </ul>
+      </section>
+
+      <!-- Professional Experience -->
+      <section class="resume-section">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="experience-item">
+          <div class="item-header">
+            <h3 class="job-title">Full-Stack Developer</h3>
+            <span class="item-date">July 2025 – Present</span>
+          </div>
+          <div class="item-company">BytechSol LLC</div>
+          <ul class="item-details">
+            <li>Developed responsive and interactive web applications.</li>
+            <li>Implemented modern UI/UX designs with optimized performance.</li>
+            <li>Worked on backend logic and API integration using Python.</li>
+            <li>Collaborated with team members to deliver scalable solutions.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="resume-section">
+        <h2 class="section-title">Education</h2>
+        <div class="education-item">
+          <div class="item-header">
+            <h3 class="degree">Full Stack Development Diploma (1 Year)</h3>
+            <span class="item-date">2024</span>
+          </div>
+          <div class="item-company">Aptech</div>
+        </div>
+        <div class="education-item">
+          <div class="item-header">
+            <h3 class="degree">Commerce</h3>
+            <span class="item-date">2023 – 2025</span>
+          </div>
+          <div class="item-company">Govt Degree College Block 7</div>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -379,19 +656,26 @@
   <!-- Print Styles -->
   <style>
     @media print {
-      .header, .footer-bar, .bg-pattern {
+
+      .header,
+      .footer-bar,
+      .bg-pattern {
         display: none !important;
       }
+
       body {
         background: white;
       }
+
       .pdf-container {
         padding: 0;
       }
+
       .pdf-frame-wrapper::before,
       .pdf-frame-wrapper::after {
         display: none;
       }
+
       .pdf-embed {
         border: none;
         min-height: 100vh;
@@ -399,4 +683,5 @@
     }
   </style>
 </body>
+
 </html>

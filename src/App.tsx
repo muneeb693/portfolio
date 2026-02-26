@@ -36,8 +36,8 @@ export default function App() {
             transition={{ duration: 1 }} // Re-added the transition prop
             className="relative w-full overflow-x-hidden bg-black gpu-accelerated"
           >
-            {/* Ambient background glow */}
-            <div className="fixed inset-0 z-0 pointer-events-none">
+            {/* Ambient background glow - hidden on mobile for performance */}
+            <div className="fixed inset-0 z-0 pointer-events-none hidden md:block">
               <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-neon-blue)] opacity-10 blur-[120px] rounded-full mix-blend-screen" />
               <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600 opacity-10 blur-[120px] rounded-full mix-blend-screen" />
             </div>

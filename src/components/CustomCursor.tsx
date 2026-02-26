@@ -6,9 +6,21 @@ export default function CustomCursor() {
   const mouseY = useMotionValue(0);
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  // Smooth spring configuration
+  useEffect(() => {
+    const checkTouch = () => {
+      // Precise check: Only disable if the primary pointer is coarse (like a finger)
+      // and hover is not supported (standard mobile behavior)
+      const isMobile = window.matchMedia("(pointer: coarse)").matches &&
+        !window.matchMedia("(hover: hover)").matches;
+      setIsTouchDevice(isMobile);
+    };
+    checkTouch();
+  }, []);
+
+  // Premium spring configuration
   const dotSpringConfig = { stiffness: 800, damping: 50 };
   const ringSpringConfig = { stiffness: 250, damping: 30 };
 
@@ -19,7 +31,6 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
-      // Show cursor as soon as mouse moves
       if (!isVisible) setIsVisible(true);
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -35,7 +46,6 @@ export default function CustomCursor() {
         target.classList.contains('interactive') ||
         window.getComputedStyle(target).cursor === 'pointer'
       );
-
       setIsHovering(isInteractive);
     };
 
@@ -61,12 +71,20 @@ export default function CustomCursor() {
     };
   }, [mouseX, mouseY, isVisible]);
 
-  // Don't render if not visible (e.g. initial state or mouse out of window)
-  if (!isVisible) return null;
+  useEffect(() => {
+    if (isVisible && !isTouchDevice) {
+      document.body.classList.add('cursor-active');
+    } else {
+      document.body.classList.remove('cursor-active');
+    }
+    return () => document.body.classList.remove('cursor-active');
+  }, [isVisible, isTouchDevice]);
+
+  // Completely hidden on mobile or when not visible
+  if (!isVisible || isTouchDevice) return null;
 
   return (
     <>
-      {/* Outer Ring */}
       <motion.div
         className="fixed top-0 left-0 w-10 h-10 border border-[var(--color-neon-blue)] rounded-full pointer-events-none z-[9999] opacity-40"
         style={{
@@ -82,8 +100,6 @@ export default function CustomCursor() {
         }}
         transition={{ type: 'spring', ...ringSpringConfig }}
       />
-
-      {/* Center Dot */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 bg-[var(--color-neon-blue)] rounded-full pointer-events-none z-[10000] box-glow"
         style={{

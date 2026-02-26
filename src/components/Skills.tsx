@@ -83,14 +83,23 @@ function SkillHexNode({ skill, index }: { skill: typeof skills[0], index: number
 }
 
 export default function Skills() {
+  const [isTouch, setIsTouch] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start end', 'end start'],
   });
 
+  React.useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
   const rotateX = useTransform(scrollYProgress, [0, 1], [15, -15]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
+
+  // Use simpler animations on mobile
+  const springRotateX = useSpring(rotateX, { stiffness: 100, damping: 30 });
+  const springScale = useSpring(scale, { stiffness: 100, damping: 30 });
 
   return (
     <section id="skills" ref={containerRef} className="relative py-32 bg-black overflow-x-hidden flex flex-col items-center">
@@ -131,7 +140,10 @@ export default function Skills() {
 
         {/* Hex Grid Layout */}
         <motion.div
-          style={{ rotateX, scale }}
+          style={{
+            rotateX: isTouch ? 0 : springRotateX,
+            scale: isTouch ? 1 : springScale
+          }}
           className="flex flex-wrap justify-center gap-4 md:gap-x-12 md:gap-y-8 max-w-5xl mx-auto perspective-1000"
         >
           {skills.map((skill, index) => (

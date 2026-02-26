@@ -273,7 +273,12 @@ body {
   background-color: #000;
   color: #fff;
   font-family: var(--font-space);
-  cursor: none;
+}
+
+@media (hover: hover) {
+  body.cursor-active {
+    cursor: none;
+  }
 }
 
 /* Custom Scrollbar */

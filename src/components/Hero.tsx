@@ -175,12 +175,30 @@ function Scene() {
 }
 
 export default function Hero() {
+  const [isTouch, setIsTouch] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* 3D Canvas Background */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 10], fov: 50 }} dpr={[1, 1.2]} performance={{ min: 0.5 }}>
-          <Scene />
+          {!isTouch ? (
+            <Scene />
+          ) : (
+            <>
+              <color attach="background" args={['#000000']} />
+              <Stars radius={100} depth={50} count={500} factor={4} saturation={0} fade speed={0.5} />
+              <ambientLight intensity={0.5} />
+              <pointLight position={[10, 10, 10]} intensity={1} color="#00F5FF" />
+              <Float speed={1} rotationIntensity={0.1} floatIntensity={0.2}>
+                <NeuralLattice />
+              </Float>
+            </>
+          )}
         </Canvas>
       </div>
 
